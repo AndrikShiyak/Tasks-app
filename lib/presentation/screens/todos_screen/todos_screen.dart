@@ -28,7 +28,7 @@ class _TodosScreenState extends State<TodosScreen> {
       appBar: MainAppBar(title: 'Todos'),
       body: BlocBuilder<TodosCubit, TodosState>(
         builder: (context, state) {
-          _todosList ??= state.todosList;
+          _todosList = state.todosList;
 
           return ReordableList(
             children: [
@@ -50,6 +50,7 @@ class _TodosScreenState extends State<TodosScreen> {
                 newIndex -= 1;
               }
               final TodoModel item = _todosList!.removeAt(oldIndex);
+
               _todosList!.insert(newIndex, item);
 
               context.read<TodosCubit>().updateTodos(_todosList!);

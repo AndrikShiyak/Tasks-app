@@ -54,7 +54,7 @@ class TodosCubit extends Cubit<TodosState> with HydratedMixin {
   void saveTodo(TodoModel newTodo) =>
       emit(state.copyWith(todosList: [...state.todosList, newTodo]));
 
-  void addCompleteTodo(TodoModel todo) {
+  void completeTodo(TodoModel todo) {
     emit(state.copyWith(completeTodoList: [...state.completeTodoList, todo]));
     deleteTodo(todo.id);
   }

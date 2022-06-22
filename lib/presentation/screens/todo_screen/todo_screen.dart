@@ -45,9 +45,7 @@ class TodoScreen extends StatelessWidget {
         cubit.state.selectedTodo!.subTodos.length) {
       _showDialog(
         context: context,
-        addToComplete: () {
-          cubit.addCompleteTodo(updatedTodo);
-        },
+        confirm: () => cubit.completeTodo(updatedTodo),
       );
     }
   }
@@ -86,7 +84,7 @@ class TodoScreen extends StatelessWidget {
 
   void _showDialog({
     required BuildContext context,
-    required VoidCallback addToComplete,
+    required VoidCallback confirm,
   }) {
     showDialog(
       context: context,
@@ -101,7 +99,7 @@ class TodoScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.popUntil(
                     context, ModalRoute.withName(AppRouter.mainTabScreen));
-                addToComplete();
+                confirm();
               },
               child: const Text('Yes')),
         ],

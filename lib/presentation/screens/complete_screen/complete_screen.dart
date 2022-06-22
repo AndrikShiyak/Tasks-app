@@ -18,7 +18,7 @@ class CompleteScreen extends StatelessWidget {
       body: BlocBuilder<TodosCubit, TodosState>(
         builder: (context, state) {
           return ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
             itemBuilder: (context, index) => TodoCard(
               todo: state.completeTodoList[index],
               onTap: () {
