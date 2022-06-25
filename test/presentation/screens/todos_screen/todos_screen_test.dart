@@ -77,8 +77,11 @@ void main() async {
     );
 
     testWidgets(
-      "Should be visible 5, maximum 6 todo cards at once",
+      "Should be visible 6, maximum 7 todo cards at once"
+      " on screen without AppBar and BottomNavigationBar",
       (WidgetTester tester) async {
+        tester.binding.window.physicalSizeTestValue = const Size(320, 1500);
+
         await tester.pumpWidget(
           TestsHelper.parentWidget(
             const TodosScreen(title: 'Todos'),
@@ -86,47 +89,47 @@ void main() async {
         );
 
         expect(find.text('test 1'), findsOneWidget);
-        expect(find.text('test 6'), findsNothing);
-        expect(find.byType(TodoCard), findsNWidgets(5));
-
-        await tester.drag(find.byType(ReordableList), Offset(0, -50.h));
-        await tester.pump();
-
-        expect(find.text('test 1'), findsOneWidget);
-        expect(find.text('test 6'), findsOneWidget);
+        expect(find.text('test 7'), findsNothing);
         expect(find.byType(TodoCard), findsNWidgets(6));
 
         await tester.drag(find.byType(ReordableList), Offset(0, -50.h));
         await tester.pump();
 
         expect(find.text('test 1'), findsOneWidget);
-        expect(find.text('test 6'), findsOneWidget);
+        expect(find.text('test 7'), findsNothing);
         expect(find.byType(TodoCard), findsNWidgets(6));
 
         await tester.drag(find.byType(ReordableList), Offset(0, -50.h));
         await tester.pump();
 
         expect(find.text('test 1'), findsOneWidget);
-        expect(find.text('test 6'), findsOneWidget);
+        expect(find.text('test 7'), findsNothing);
+        expect(find.byType(TodoCard), findsNWidgets(6));
 
         await tester.drag(find.byType(ReordableList), Offset(0, -50.h));
         await tester.pump();
 
         expect(find.text('test 1'), findsOneWidget);
-        expect(find.text('test 6'), findsOneWidget);
+        expect(find.text('test 7'), findsNothing);
 
         await tester.drag(find.byType(ReordableList), Offset(0, -50.h));
         await tester.pump();
 
+        expect(find.text('test 1'), findsOneWidget);
         expect(find.text('test 7'), findsOneWidget);
-        expect(find.text('test 6'), findsOneWidget);
+
+        await tester.drag(find.byType(ReordableList), Offset(0, -50.h));
+        await tester.pump();
+
+        expect(find.text('test 8'), findsNothing);
+        expect(find.text('test 7'), findsOneWidget);
 
         await tester.drag(find.byType(ReordableList), Offset(0, 250.h));
         await tester.pump();
 
         expect(find.text('test 1'), findsOneWidget);
-        expect(find.text('test 6'), findsNothing);
         expect(find.text('test 7'), findsNothing);
+        expect(find.text('test 8'), findsNothing);
       },
     );
 
