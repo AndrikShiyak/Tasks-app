@@ -22,8 +22,9 @@ class CheckboxWithTitle extends StatelessWidget {
         children: [
           Checkbox(value: value, onChanged: (_) => onTap()),
           SizedBox(width: 20.w),
-          const Spacer(),
-          Text(title),
+          Expanded(
+            child: Text(title),
+          ),
           SizedBox(width: 20.w),
         ],
       ),
